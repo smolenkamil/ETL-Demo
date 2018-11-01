@@ -1,10 +1,16 @@
 
 //@Author: Kamil Smoleń
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class MainWindow extends JFrame implements ActionListener {
 
@@ -57,7 +63,13 @@ public class MainWindow extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(scrappBtn)) {
-
+            Document doc = null;
+            try {
+                doc = Jsoup.connect("http://en.wikipedia.org/").get();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            textArea.append(doc.outerHtml());
         }
     }
 }
