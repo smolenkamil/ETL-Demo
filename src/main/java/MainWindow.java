@@ -124,7 +124,7 @@ public class MainWindow extends JFrame implements ActionListener, FocusListener 
             Document doc = null;
             try {
                 doc = Jsoup.connect(urlTextField.getText()).get();
-            } catch (IOException e1) {
+            } catch (Exception e1) {
                 e1.printStackTrace();
             }
             if(idField.getText().isEmpty() && tagField.getText().isEmpty() && classField.getText().isEmpty()){
@@ -132,7 +132,7 @@ public class MainWindow extends JFrame implements ActionListener, FocusListener 
             } else if (!idField.getText().isEmpty()){
                 try{
                     textArea.append(doc.body().getElementById(idField.getText()+"").html());
-                } catch (IllegalArgumentException el){
+                } catch (Exception el){
                     textArea.append("Error message: " + el.getMessage() + " ID");
                 }
             }else if (!tagField.getText().isEmpty()){
@@ -142,7 +142,7 @@ public class MainWindow extends JFrame implements ActionListener, FocusListener 
                     for (Element oneElement : foundElements) {
                         textArea.append(oneElement.html()+"\n");
                     }
-                } catch (IllegalArgumentException el){
+                } catch (Exception el){
                     textArea.append("Error message: " + el.getMessage() + " TAG");
                 }
             }else if (!classField.getText().isEmpty()){
@@ -152,7 +152,7 @@ public class MainWindow extends JFrame implements ActionListener, FocusListener 
                     for (Element oneElement : foundElements) {
                         textArea.append(oneElement.html()+"\n");
                     }
-                } catch (IllegalArgumentException el){
+                } catch (Exception el){
                     textArea.append("Error message: " + el.getMessage() + " CLASS");
                 }
             }
